@@ -1,0 +1,36 @@
+---
+import { site } from '../data/site';
+const { links } = site;
+---
+<footer id="contact" class="wrap">
+  <div class="section-head">
+    <span class="mono muted">05 · Contact</span>
+    <h2>Have a problem with no clear path? I’d like to hear it.</h2>
+  </div>
+  <div class="grid">
+    <div>
+      <p class="mono"><span class="dot"></span>{site.availability}</p>
+      <p class="lead">The fastest way to reach me is email.</p>
+      <div class="ctas">
+        <a class="btn solid" href={`mailto:${links.email}`}>{links.email}</a>
+        <a class="btn" href={links.resume}>Resume ↓</a>
+      </div>
+    </div>
+    <ul class="links mono">
+      <li><a href={links.linkedin}>LinkedIn ↗</a></li>
+      <li><a href={links.github}>GitHub ↗</a></li>
+      <li><a href={links.medium}>Medium ↗</a></li>
+      <li><a href={links.instagram}>Instagram ↗</a></li>
+    </ul>
+  </div>
+  <p class="mono muted small">© {new Date().getFullYear()} Gowtham B H · Chennai, India · <a href="#top">Back to top ↑</a></p>
+</footer>
+<style>
+  footer { padding-top: 96px; padding-bottom: 40px; }
+  .grid { display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: end; }
+  .lead { font-size: 1.15rem; max-width: 40ch; }
+  .ctas { display: flex; gap: 10px; flex-wrap: wrap; }
+  .links { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+  .small { margin-top: 64px; border-top: 1px solid var(--rule); padding-top: 16px; }
+  @media (max-width: 720px) { .grid { grid-template-columns: 1fr; } .btn.solid { word-break: break-all; } }
+</style>
