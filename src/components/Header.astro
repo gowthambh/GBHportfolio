@@ -1,0 +1,26 @@
+---
+import { site } from '../data/site';
+const nav = [
+  { href: '/#work', label: 'Work' },
+  { href: '/#experience', label: 'Experience' },
+  { href: '/#skills', label: 'Skills' },
+  { href: '/#contact', label: 'Contact' },
+];
+---
+<a class="skip mono" href="#main">Skip to content</a>
+<header class="wrap">
+  <a href="/" class="name">Gowtham B H</a>
+  <nav class="mono">
+    {nav.map((n) => <a href={n.href}>{n.label}</a>)}
+    <a href={site.links.resume}>Resume ↓</a>
+  </nav>
+</header>
+<style>
+  header { display: flex; align-items: baseline; justify-content: space-between; gap: 12px 24px; padding-top: 22px; padding-bottom: 22px; flex-wrap: wrap; position: relative; z-index: 1; }
+  .name { font-family: var(--serif); font-size: 1.2rem; font-weight: 600; text-decoration: none; }
+  nav { display: flex; gap: 6px 20px; flex-wrap: wrap; }
+  nav a { text-decoration: none; color: var(--muted); }
+  nav a:hover { color: var(--leaf); }
+  .skip { position: absolute; left: -9999px; }
+  .skip:focus { left: 16px; top: 8px; background: var(--ink); color: var(--paper); padding: 6px 10px; z-index: 10; }
+</style>
