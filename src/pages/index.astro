@@ -1,7 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
-import Contours from '../components/Contours.astro';
 import { site, experience } from '../data/site';
 
 const all = (await getCollection('projects', (p) => !p.data.draft)).sort((a, b) => b.data.order - a.data.order);
@@ -14,24 +13,24 @@ const n = (i: number) => String(i + 1).padStart(2, '0');
     <div class="wrap inner">
       <div class="copy">
         <p class="mono meta"><span class="dot"></span>{site.availability}</p>
-        <h1>{site.headline}</h1>
-        <p class="pitch">{site.intro} {site.pitch}</p>
+        <h1>{site.name}</h1>
+        <p class="tagline">AI engineer. <em>{site.headline}</em></p>
+        <p class="pitch">{site.pitch}</p>
         <div class="ctas">
-          <a class="btn solid" href="#work">Selected work ↓</a>
-          <a class="btn" href={site.links.resume}>Resume ↓</a>
+          <a class="btn solid" href="#work">See my work ↓</a>
+          <a class="btn" href={site.links.resume}>Download resume</a>
         </div>
       </div>
-      <figure class="map" aria-label="Contour map with a legend of the five roles">
-        <div class="terrain">
-          <Contours cx={600} cy={280} rings={11} />
-          <span class="pin" aria-hidden="true"></span>
-          <span class="here mono">You are here · Chennai<br />13.08° N, 80.27° E</span>
-        </div>
-        <figcaption>
-          <span class="mono muted">Legend</span>
-          <ul class="roles">{site.roles.map((r) => <li>{r}</li>)}</ul>
-        </figcaption>
-      </figure>
+      <aside class="now" aria-label="Right now">
+        <p class="mono muted">Right now</p>
+        <ul>
+          <li><span class="mono muted">Building</span><a href="/projects/tailrd/">Tailrd, a resume tailor with 50+ users</a></li>
+          <li><span class="mono muted">Running</span><span>Your Space, Virtually: voice AI agents for clinics</span></li>
+          <li><span class="mono muted">Looking for</span><span>An AI engineering role, remote</span></li>
+          <li><span class="mono muted">Also</span><span>{site.roles.slice(2).join(', ')}</span></li>
+          <li><span class="mono muted">Based in</span><span>{site.location}</span></li>
+        </ul>
+      </aside>
     </div>
   </section>
 
@@ -137,23 +136,21 @@ const n = (i: number) => String(i + 1).padStart(2, '0');
 
 <style>
   .hero { border-bottom: 1px solid var(--rule); }
-  .hero .inner { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 56px; align-items: center; padding-top: 64px; padding-bottom: 72px; }
-  .meta { margin-bottom: 24px; }
-  h1 { font-size: clamp(2.4rem, 5vw, 4.1rem); font-weight: 450; max-width: 15ch; text-wrap: balance; }
-  .pitch { font-size: 1.15rem; max-width: 52ch; margin: 26px 0 30px; }
+  .hero .inner { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 4fr); gap: 72px; align-items: end; padding-top: 88px; padding-bottom: 80px; }
+  .meta { margin-bottom: 28px; }
+  h1 { font-size: clamp(3rem, 7.5vw, 5.6rem); font-weight: 400; line-height: 0.95; letter-spacing: -0.02em; }
+  .tagline { font-family: var(--serif); font-size: clamp(1.35rem, 2.4vw, 1.75rem); line-height: 1.25; margin: 22px 0 0; max-width: 30ch; text-wrap: balance; }
+  .tagline em { color: var(--leaf); }
+  .pitch { font-size: 1.08rem; max-width: 52ch; margin: 22px 0 32px; color: var(--muted); }
   .ctas { display: flex; gap: 10px; flex-wrap: wrap; }
-
-  .map { margin: 0; border: 1px solid var(--ink); background: var(--paper); }
-  .terrain { position: relative; aspect-ratio: 4 / 3; overflow: hidden; border-bottom: 1px solid var(--ink); }
-  .pin { position: absolute; left: 50%; top: 50%; width: 11px; height: 11px; margin: -5px 0 0 -5px; border-radius: 50%; background: var(--leaf); box-shadow: 0 0 0 5px rgba(46, 90, 60, 0.18); }
-  .here { position: absolute; left: calc(50% + 14px); top: calc(50% + 10px); font-size: 0.7rem; line-height: 1.4; color: var(--ink); background: var(--paper); padding: 2px 4px; }
-  figcaption { padding: 14px 16px 16px; }
-  .roles { list-style: none; margin: 6px 0 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 2px 16px; font-size: 0.92rem; }
-  .roles li::before { content: '— '; color: var(--leaf); }
+  .now { border-top: 1px solid var(--ink); padding-top: 12px; font-size: 0.95rem; }
+  .now ul { list-style: none; margin: 10px 0 0; padding: 0; }
+  .now li { display: grid; grid-template-columns: 96px 1fr; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--rule); }
+  .now li .mono { font-size: 0.72rem; padding-top: 3px; }
+  .now a { color: var(--ink); }
   @media (max-width: 860px) {
-    .hero .inner { grid-template-columns: 1fr; gap: 40px; padding-top: 40px; }
+    .hero .inner { grid-template-columns: 1fr; gap: 48px; padding-top: 48px; padding-bottom: 56px; }
   }
-  @media (max-width: 420px) { .roles { grid-template-columns: 1fr; } }
 
   .numbers { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; margin: 0; background: var(--rule); border-bottom: 1px solid var(--rule); }
   .numbers div { background: var(--paper); padding: 28px 20px 26px; }
