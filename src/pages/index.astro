@@ -11,16 +11,27 @@ const n = (i: number) => String(i + 1).padStart(2, '0');
 ---
 <Base>
   <section class="hero">
-    <Contours />
     <div class="wrap inner">
-      <p class="mono meta"><span class="dot"></span>{site.availability} <span class="muted">· {site.location}</span></p>
-      <h1>{site.headline}</h1>
-      <p class="pitch">{site.pitch}</p>
-      <ul class="roles mono">{site.roles.map((r) => <li>{r}</li>)}</ul>
-      <div class="ctas">
-        <a class="btn solid" href="#work">Selected work ↓</a>
-        <a class="btn" href={site.links.resume}>Resume ↓</a>
+      <div class="copy">
+        <p class="mono meta"><span class="dot"></span>{site.availability}</p>
+        <h1>{site.headline}</h1>
+        <p class="pitch">{site.intro} {site.pitch}</p>
+        <div class="ctas">
+          <a class="btn solid" href="#work">Selected work ↓</a>
+          <a class="btn" href={site.links.resume}>Resume ↓</a>
+        </div>
       </div>
+      <figure class="map" aria-label="Contour map with a legend of the five roles">
+        <div class="terrain">
+          <Contours cx={600} cy={280} rings={11} />
+          <span class="pin" aria-hidden="true"></span>
+          <span class="here mono">You are here · Chennai<br />13.08° N, 80.27° E</span>
+        </div>
+        <figcaption>
+          <span class="mono muted">Legend</span>
+          <ul class="roles">{site.roles.map((r) => <li>{r}</li>)}</ul>
+        </figcaption>
+      </figure>
     </div>
   </section>
 
@@ -125,14 +136,24 @@ const n = (i: number) => String(i + 1).padStart(2, '0');
 </Base>
 
 <style>
-  .hero { position: relative; overflow: hidden; border-bottom: 1px solid var(--rule); }
-  .hero .inner { position: relative; padding-top: 72px; padding-bottom: 72px; }
-  .meta { margin-bottom: 28px; }
-  h1 { font-size: clamp(2.6rem, 7.2vw, 5.6rem); max-width: 13ch; font-weight: 450; }
-  .pitch { font-size: 1.2rem; max-width: 54ch; margin: 28px 0 22px; }
-  .roles { display: flex; flex-wrap: wrap; list-style: none; padding: 0; margin: 0 0 32px; color: var(--muted); }
-  .roles li:not(:last-child)::after { content: '/'; margin: 0 10px; color: var(--rule); }
+  .hero { border-bottom: 1px solid var(--rule); }
+  .hero .inner { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 56px; align-items: center; padding-top: 64px; padding-bottom: 72px; }
+  .meta { margin-bottom: 24px; }
+  h1 { font-size: clamp(2.4rem, 5vw, 4.1rem); font-weight: 450; max-width: 15ch; text-wrap: balance; }
+  .pitch { font-size: 1.15rem; max-width: 52ch; margin: 26px 0 30px; }
   .ctas { display: flex; gap: 10px; flex-wrap: wrap; }
+
+  .map { margin: 0; border: 1px solid var(--ink); background: var(--paper); }
+  .terrain { position: relative; aspect-ratio: 4 / 3; overflow: hidden; border-bottom: 1px solid var(--ink); }
+  .pin { position: absolute; left: 50%; top: 50%; width: 11px; height: 11px; margin: -5px 0 0 -5px; border-radius: 50%; background: var(--leaf); box-shadow: 0 0 0 5px rgba(46, 90, 60, 0.18); }
+  .here { position: absolute; left: calc(50% + 14px); top: calc(50% + 10px); font-size: 0.7rem; line-height: 1.4; color: var(--ink); background: var(--paper); padding: 2px 4px; }
+  figcaption { padding: 14px 16px 16px; }
+  .roles { list-style: none; margin: 6px 0 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 2px 16px; font-size: 0.92rem; }
+  .roles li::before { content: '— '; color: var(--leaf); }
+  @media (max-width: 860px) {
+    .hero .inner { grid-template-columns: 1fr; gap: 40px; padding-top: 40px; }
+  }
+  @media (max-width: 420px) { .roles { grid-template-columns: 1fr; } }
 
   .numbers { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; margin: 0; background: var(--rule); border-bottom: 1px solid var(--rule); }
   .numbers div { background: var(--paper); padding: 28px 20px 26px; }
