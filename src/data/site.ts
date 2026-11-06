@@ -7,9 +7,8 @@ export const site = {
   availability: 'Open to AI engineering roles · remote',
   roles: ['Software engineer', 'AI engineer', 'Independent researcher', 'Business consultant', 'Photographer'],
   headline: 'I take on the problems that don’t have a path yet.',
-  intro: 'I’m Gowtham, an AI engineer in Chennai.',
   pitch:
-    'I turn rough ideas into software people actually use. I own the work end to end, from the first conversation to the release, and I use AI to move faster without cutting corners on the engineering.',
+    'I’m an AI engineer. I turn rough ideas into software people actually use. I own the work end to end, from the first conversation to the release, and I use AI to move faster without cutting corners on the engineering.',
   description:
     'Gowtham B H, AI engineer in Chennai. LLM apps, voice agents, and computer vision, shipped end to end.',
   numbers: [

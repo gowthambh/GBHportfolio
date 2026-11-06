@@ -1,7 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
-import Contours from '../components/Contours.astro';
 import { site, experience } from '../data/site';
 
 const all = (await getCollection('projects', (p) => !p.data.draft)).sort((a, b) => b.data.order - a.data.order);
@@ -12,26 +11,15 @@ const n = (i: number) => String(i + 1).padStart(2, '0');
 <Base>
   <section class="hero">
     <div class="wrap inner">
-      <div class="copy">
-        <p class="mono meta"><span class="dot"></span>{site.availability}</p>
-        <h1>{site.headline}</h1>
-        <p class="pitch">{site.intro} {site.pitch}</p>
-        <div class="ctas">
-          <a class="btn solid" href="#work">Selected work ↓</a>
-          <a class="btn" href={site.links.resume}>Resume ↓</a>
-        </div>
+      <p class="mono meta"><span class="dot"></span>{site.availability} <span class="muted">· {site.location}</span></p>
+      <h1>{site.name}</h1>
+      <p class="tagline">{site.headline}</p>
+      <p class="pitch">{site.pitch}</p>
+      <p class="roles mono muted">{site.roles.join(' · ')}</p>
+      <div class="ctas">
+        <a class="btn solid" href="#work">Selected work ↓</a>
+        <a class="btn" href={site.links.resume}>Resume ↓</a>
       </div>
-      <figure class="map" aria-label="Contour map with a legend of the five roles">
-        <div class="terrain">
-          <Contours cx={600} cy={280} rings={11} />
-          <span class="pin" aria-hidden="true"></span>
-          <span class="here mono">You are here · Chennai<br />13.08° N, 80.27° E</span>
-        </div>
-        <figcaption>
-          <span class="mono muted">Legend</span>
-          <ul class="roles">{site.roles.map((r) => <li>{r}</li>)}</ul>
-        </figcaption>
-      </figure>
     </div>
   </section>
 
@@ -137,23 +125,14 @@ const n = (i: number) => String(i + 1).padStart(2, '0');
 
 <style>
   .hero { border-bottom: 1px solid var(--rule); }
-  .hero .inner { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 56px; align-items: center; padding-top: 64px; padding-bottom: 72px; }
-  .meta { margin-bottom: 24px; }
-  h1 { font-size: clamp(2.4rem, 5vw, 4.1rem); font-weight: 450; max-width: 15ch; text-wrap: balance; }
-  .pitch { font-size: 1.15rem; max-width: 52ch; margin: 26px 0 30px; }
+  .hero .inner { padding-top: 88px; padding-bottom: 80px; }
+  .meta { margin-bottom: 28px; }
+  h1 { font-size: clamp(3rem, 9vw, 7rem); font-weight: 500; letter-spacing: -0.03em; line-height: 0.95; }
+  .tagline { font-family: var(--serif); font-size: clamp(1.4rem, 2.6vw, 2rem); line-height: 1.25; max-width: 28ch; margin: 22px 0 0; color: var(--leaf); text-wrap: balance; }
+  .pitch { font-size: 1.15rem; max-width: 56ch; margin: 22px 0 18px; }
+  .roles { margin: 0 0 32px; }
   .ctas { display: flex; gap: 10px; flex-wrap: wrap; }
-
-  .map { margin: 0; border: 1px solid var(--ink); background: var(--paper); }
-  .terrain { position: relative; aspect-ratio: 4 / 3; overflow: hidden; border-bottom: 1px solid var(--ink); }
-  .pin { position: absolute; left: 50%; top: 50%; width: 11px; height: 11px; margin: -5px 0 0 -5px; border-radius: 50%; background: var(--leaf); box-shadow: 0 0 0 5px rgba(46, 90, 60, 0.18); }
-  .here { position: absolute; left: calc(50% + 14px); top: calc(50% + 10px); font-size: 0.7rem; line-height: 1.4; color: var(--ink); background: var(--paper); padding: 2px 4px; }
-  figcaption { padding: 14px 16px 16px; }
-  .roles { list-style: none; margin: 6px 0 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 2px 16px; font-size: 0.92rem; }
-  .roles li::before { content: '— '; color: var(--leaf); }
-  @media (max-width: 860px) {
-    .hero .inner { grid-template-columns: 1fr; gap: 40px; padding-top: 40px; }
-  }
-  @media (max-width: 420px) { .roles { grid-template-columns: 1fr; } }
+  @media (max-width: 720px) { .hero .inner { padding-top: 48px; padding-bottom: 56px; } }
 
   .numbers { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; margin: 0; background: var(--rule); border-bottom: 1px solid var(--rule); }
   .numbers div { background: var(--paper); padding: 28px 20px 26px; }
