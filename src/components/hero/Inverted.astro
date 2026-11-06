@@ -1,0 +1,35 @@
+---
+// Option C: dark ink block, the paper site begins below it.
+import { site } from '../../data/site';
+---
+<section class="c">
+  <div class="wrap inner">
+    <div class="top mono">
+      <span>{site.name}</span>
+      <span><span class="dot"></span>Open to AI engineering roles · remote</span>
+    </div>
+    <h1>Problems with<br />no path are<br /><em>my favourite kind.</em></h1>
+    <div class="bottom">
+      <p>I’m an AI engineer in Chennai. I build LLM apps, voice agents, and computer vision, and I own them end to end, from the first conversation to the release.</p>
+      <div class="ctas">
+        <a class="btn light" href="/#work">Selected work ↓</a>
+        <a class="btn ghost" href={site.links.resume}>Resume ↓</a>
+      </div>
+    </div>
+  </div>
+</section>
+<style>
+  .c { background: var(--ink); color: var(--paper); }
+  .inner { padding-top: 40px; padding-bottom: 64px; min-height: 78vh; display: flex; flex-direction: column; justify-content: space-between; gap: 48px; }
+  .top { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; color: #bdb7a8; }
+  .dot { background: #7fbf8f; }
+  h1 { font-size: clamp(2.8rem, 8.5vw, 7.4rem); line-height: 0.95; letter-spacing: -0.035em; font-weight: 450; }
+  h1 em { color: #9fd1a9; }
+  .bottom { display: grid; grid-template-columns: 1fr auto; gap: 32px; align-items: end; border-top: 1px solid #3a3832; padding-top: 24px; }
+  .bottom p { max-width: 52ch; margin: 0; color: #d9d4c7; font-size: 1.1rem; }
+  .ctas { display: flex; gap: 10px; flex-wrap: wrap; }
+  .btn.light { background: var(--paper); color: var(--ink); border-color: var(--paper); }
+  .btn.ghost { border-color: #8a857a; color: var(--paper); }
+  .btn:hover { background: #9fd1a9; border-color: #9fd1a9; color: var(--ink); }
+  @media (max-width: 860px) { .inner { min-height: 0; } .bottom { grid-template-columns: 1fr; } }
+</style>

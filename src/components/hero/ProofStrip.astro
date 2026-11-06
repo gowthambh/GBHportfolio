@@ -1,0 +1,48 @@
+---
+// Option B: one big statement, then a "now / recently / alongside" strip of proof.
+import { site } from '../../data/site';
+const proof = [
+  { when: 'Now', what: 'Building Tailrd', detail: 'AI resume tailoring, shipped solo', metric: '50+ users' },
+  { when: '2025–26', what: 'AI Engineer, Q.DoTZ', detail: 'Plant identification engine, team of researchers', metric: '~30% more accurate' },
+  { when: 'Alongside', what: 'Your Space, Virtually', detail: 'Voice agents and growth work for clients', metric: 'Clients worldwide' },
+];
+---
+<section class="b">
+  <div class="wrap">
+    <p class="mono meta"><span class="dot"></span>{site.name} · AI Engineer · {site.location}</p>
+    <h1>I take on the problems that don’t have a <em>path</em> yet.</h1>
+    <ol class="proof">
+      {proof.map((p) => (
+        <li>
+          <span class="mono muted">{p.when}</span>
+          <strong>{p.what}</strong>
+          <span class="muted">{p.detail}</span>
+          <span class="metric">{p.metric}</span>
+        </li>
+      ))}
+    </ol>
+    <div class="ctas">
+      <a class="btn solid" href="/#work">See the work ↓</a>
+      <a class="btn" href={site.links.resume}>Resume ↓</a>
+      <span class="mono muted">Open to AI engineering roles · remote</span>
+    </div>
+  </div>
+</section>
+<style>
+  .b { border-bottom: 1px solid var(--rule); padding: 88px 0 72px; }
+  .meta { margin-bottom: 26px; }
+  h1 { font-size: clamp(2.6rem, 7vw, 6rem); line-height: 1; letter-spacing: -0.03em; font-weight: 450; max-width: 17ch; text-wrap: balance; }
+  h1 em { font-style: italic; color: var(--leaf); text-decoration: underline; text-decoration-thickness: 3px; text-underline-offset: 10px; }
+  .proof { list-style: none; padding: 0; margin: 56px 0 36px; display: grid; grid-template-columns: repeat(3, 1fr); border-top: 2px solid var(--ink); }
+  .proof li { display: flex; flex-direction: column; gap: 4px; padding: 18px 24px 4px 0; }
+  .proof li + li { padding-left: 24px; border-left: 1px solid var(--rule); }
+  .proof strong { font-family: var(--serif); font-weight: 500; font-size: 1.3rem; }
+  .metric { font-family: var(--mono); font-size: 0.85rem; color: var(--leaf); margin-top: 6px; }
+  .ctas { display: flex; gap: 10px 16px; flex-wrap: wrap; align-items: center; }
+  @media (max-width: 860px) {
+    .b { padding-top: 48px; }
+    .proof { grid-template-columns: 1fr; }
+    .proof li + li { padding-left: 0; border-left: 0; border-top: 1px solid var(--rule); }
+    .proof li { padding-bottom: 14px; }
+  }
+</style>

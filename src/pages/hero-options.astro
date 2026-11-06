@@ -1,0 +1,18 @@
+---
+// Temporary page to compare hero designs. Delete once one is chosen.
+import Base from '../layouts/Base.astro';
+import SpecSheet from '../components/hero/SpecSheet.astro';
+import ProofStrip from '../components/hero/ProofStrip.astro';
+import Inverted from '../components/hero/Inverted.astro';
+---
+<Base title="Hero options">
+  <p class="label wrap mono">Option A · Name first, with a spec sheet</p>
+  <SpecSheet />
+  <p class="label wrap mono">Option B · The statement, backed by proof</p>
+  <ProofStrip />
+  <p class="label wrap mono">Option C · Dark, bold, and direct</p>
+  <Inverted />
+</Base>
+<style>
+  .label { margin: 0 auto; padding-top: 28px; padding-bottom: 10px; color: var(--leaf); font-size: 0.9rem; border-top: 6px solid var(--ink); }
+</style>
