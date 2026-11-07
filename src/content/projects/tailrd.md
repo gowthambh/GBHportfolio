@@ -14,6 +14,17 @@ stats:
   - { value: '50+', label: users }
   - { value: Weekly, label: releases }
   - { value: '2', label: 'surfaces: web and extension' }
+overview: >-
+  Tailrd is a resume tailoring product for job seekers. You paste a job description, and a multi-step LLM workflow rewrites your resume for that role, checks how well it fits an applicant tracking system, and drafts a cover letter. It runs as a web app and a browser extension, so you can tailor right from a job listing. Releases go out weekly through a preview-to-production pipeline.
+tech:
+  - area: AI
+    items: [LLM APIs, multi-step prompt workflow, structured outputs, ATS fit checks]
+  - area: Frontend
+    items: [JavaScript, HTML, CSS, browser extension]
+  - area: Backend and hosting
+    items: [Firebase, Firebase Hosting]
+  - area: Delivery
+    items: [GitHub Actions CI/CD, PR-based preview to production]
 ---
 
 ## The problem

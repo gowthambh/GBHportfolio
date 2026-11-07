@@ -12,6 +12,17 @@ stats:
   - { value: '~30%', label: more accurate than any single model }
   - { value: '3', label: 'models: detect, segment, classify' }
   - { value: '12', label: R&D initiatives coordinated }
+overview: >-
+  An AI engine that identifies medicinal plants from real field photos, built at Q.DoTZ. Instead of asking one model to do everything, the image goes through three stages: a detector finds the plant, a segmentation model cuts it out from the background, and a classifier names it. Behind it sits a data pipeline I designed from scratch, from the collection SOP and field work to labelling and train, validation and test splits.
+tech:
+  - area: Models
+    items: [PyTorch, object detection, image segmentation, image classification, transfer learning]
+  - area: Data
+    items: [Field and drone image collection, annotation, 80/10/10 splits]
+  - area: Language
+    items: [Python]
+  - area: Team
+    items: [Project dashboard to track 12 parallel R&D initiatives]
 ---
 
 ## The problem

@@ -12,6 +12,15 @@ stats:
   - { value: End to end, label: booking by phone }
   - { value: Calendar, label: synced automatically }
   - { value: Patient-chosen, label: reminder time }
+overview: >-
+  A voice AI agent that works the phone for small clinics. It picks up the call, books the appointment, and writes it into the clinic's calendar. It then asks the patient when they want a reminder and calls them back at that time. I build and deploy these for clinic clients through my agency, Your Space, Virtually.
+tech:
+  - area: AI
+    items: [Voice AI agents, LLM agents, tool calling]
+  - area: Integrations
+    items: [Clinic calendar sync, scheduled outbound reminder calls]
+  - area: Delivery
+    items: [Scoped and deployed per client]
 ---
 
 ## The problem

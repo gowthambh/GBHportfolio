@@ -15,6 +15,10 @@ const projects = defineCollection({
     noPath: z.string().optional(),
     stats: z.array(z.object({ value: z.string(), label: z.string() })).default([]),
     stack: z.array(z.string()).default([]),
+    // Big-picture view: what it is, who it's for, how it works.
+    overview: z.string().optional(),
+    // Full stack grouped by layer, shown on the project page.
+    tech: z.array(z.object({ area: z.string(), items: z.array(z.string()) })).default([]),
     featured: z.boolean().default(false),
     links: z.array(z.object({ label: z.string(), href: z.string() })).default([]),
     draft: z.boolean().default(false),
