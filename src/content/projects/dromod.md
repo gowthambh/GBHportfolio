@@ -4,6 +4,15 @@ summary: Real-time object detection on drones, with multi-tier encryption so the
 period: Jan – Jun 2024
 order: 202401
 stack: [Deep learning, Embedded systems]
+overview: >-
+  DroMOD keeps what a drone sees private. Object detection runs on the drone itself in real time, and every image sent back to the server is protected with several layers of encryption, so an intercepted link doesn't give away what the drone sees.
+tech:
+  - area: AI
+    items: [Deep learning, real-time object detection]
+  - area: Hardware
+    items: [Embedded systems on the drone]
+  - area: Security
+    items: [Multi-tier image encryption]
 ---
 
 ## The problem

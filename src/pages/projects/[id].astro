@@ -11,7 +11,7 @@ export async function getStaticPaths() {
 }
 const { project, prev, next } = Astro.props;
 const { Content } = await render(project);
-const { title, summary, period, role, status, noPath, stats, stack, links } = project.data;
+const { title, summary, period, role, status, noPath, stats, stack, links, overview, tech } = project.data;
 ---
 <Base title={title} description={summary}>
   <article class="wrap">
@@ -23,11 +23,28 @@ const { title, summary, period, role, status, noPath, stats, stack, links } = pr
     {stats.length > 0 && (
       <dl class="stats">{stats.map((x) => (<div><dt>{x.value}</dt><dd class="mono muted">{x.label}</dd></div>))}</dl>
     )}
-    <dl class="facts mono">
-      {role && <div><dt class="muted">Role</dt><dd>{role}</dd></div>}
-      {stack.length > 0 && <div><dt class="muted">Built with</dt><dd>{stack.join(' · ')}</dd></div>}
-    </dl>
+    {role && <dl class="facts mono"><div><dt class="muted">Role</dt><dd>{role}</dd></div></dl>}
     {links.length > 0 && <p class="ctas">{links.map((l) => <a class="btn solid" href={l.href}>{l.label} ↗</a>)}</p>}
+    {(overview || tech.length > 0 || stack.length > 0) && (
+      <div class="brief">
+        {overview && (
+          <section>
+            <h2>Overview</h2>
+            <p>{overview}</p>
+          </section>
+        )}
+        <section>
+          <h2>Tech stack</h2>
+          {tech.length > 0 ? (
+            <dl class="tech">
+              {tech.map((t) => (<div><dt class="mono muted">{t.area}</dt><dd>{t.items.join(' · ')}</dd></div>))}
+            </dl>
+          ) : (
+            <p>{stack.join(' · ')}</p>
+          )}
+        </section>
+      </div>
+    )}
     <div class="notes"><Content /></div>
     <nav class="pager mono">
       {prev ? <a href={`/projects/${prev.id}/`}>← {prev.data.title}</a> : <span />}
@@ -52,7 +69,17 @@ const { title, summary, period, role, status, noPath, stats, stack, links } = pr
   .facts div { display: grid; grid-template-columns: 110px 1fr; gap: 12px; }
   .facts dd { margin: 0; }
   .ctas { display: flex; gap: 10px; flex-wrap: wrap; }
+  .brief { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: 56px; margin-top: 48px; }
+  .brief h2 { font-size: 1.6rem; margin: 0 0 12px; padding-top: 12px; border-top: 1px solid var(--ink); }
+  .brief p { margin: 0; max-width: 60ch; }
+  .tech { margin: 0; }
+  .tech div { display: grid; grid-template-columns: 130px 1fr; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--rule); }
+  .tech div:first-child { padding-top: 2px; }
+  .tech dt { font-size: 0.75rem; padding-top: 3px; }
+  .tech dd { margin: 0; }
   .notes { max-width: 66ch; margin-top: 48px; }
+  @media (max-width: 860px) { .brief { grid-template-columns: 1fr; gap: 40px; } }
+  @media (max-width: 420px) { .tech div { grid-template-columns: 1fr; gap: 2px; } }
   .notes :global(h2) { font-size: 1.6rem; margin: 44px 0 12px; padding-top: 12px; border-top: 1px solid var(--ink); }
   .notes :global(li) { margin-bottom: 6px; }
   .pager { display: flex; justify-content: space-between; gap: 16px; margin-top: 72px; padding-top: 16px; border-top: 1px solid var(--rule); }
